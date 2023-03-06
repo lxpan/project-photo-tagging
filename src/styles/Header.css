@@ -1,12 +1,37 @@
 :root {
     --header-background-colour: #605542;
+    --header-title-colour-h1: #fdd978;
+    --header-title-colour-h2: #80acaa;
+}
+
+@font-face {
+    font-family: "Timepiece";
+    src: url('../assets/fonts/timepiece/Timepiece.ttf');
+    /* src: url('../assets/fonts/timepiece/TimepieceItalic.ttf'); */
+}
+
+body {
+    font-family: Timepiece;
 }
 
 .header-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: var(--header-background-colour);
 }
 
-.header-title {}
+.header-title-h1 {
+    padding: 0;
+    margin: 0;
+    color: var(--header-title-colour-h1);
+    text-align: center;
+}
+
+.header-title-h2 {
+    padding: 0;
+    margin: 0;
+    color: var(--header-title-colour-h2);
+    text-align: center;
+}
