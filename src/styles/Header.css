@@ -1,3 +1,12 @@
-.header-container {
-    border: dotted 4px red;
+:root {
+    --header-background-colour: #605542;
 }
+
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--header-background-colour);
+}
+
+.header-title {}
