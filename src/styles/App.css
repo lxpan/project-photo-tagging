@@ -1,0 +1,10 @@
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.App {
+    display: grid;
+    grid-template-rows: 150px 1fr;
+}
