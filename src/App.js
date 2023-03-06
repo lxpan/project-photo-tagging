@@ -1,15 +1,8 @@
+import React from 'react';
 import './App.css';
 
 function App() {
-  return (
-    /*
-      <Header />
-      <Photo />
-    */
-    <div className="App">
-      
-    </div>
-  );
+    return <div className="App" />;
 }
 
 export default App;
