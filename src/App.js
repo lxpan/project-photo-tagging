@@ -69,8 +69,18 @@ function App() {
         <div className="App">
             <Header />
             <Canvas />
-            <motion.div className="inner-cursor" variants={variantsInner} animate="default" />
-            <motion.div className="outer-cursor" variants={variantsOuter} animate="default" />
+            <motion.div
+                className="inner-cursor"
+                variants={variantsInner}
+                animate="default"
+                transition={{ type: 'spring', duration: 0 }}
+            />
+            <motion.div
+                className="outer-cursor"
+                variants={variantsOuter}
+                animate="default"
+                transition={{ type: 'spring', duration: 0 }}
+            />
         </div>
     );
 }
