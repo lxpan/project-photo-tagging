@@ -1,7 +1,14 @@
-body {
+@font-face {
+    font-family: "Timepiece";
+    src: url('../assets/fonts/timepiece/Timepiece.ttf');
+    /* src: url('../assets/fonts/timepiece/TimepieceItalic.ttf'); */
+}
+
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: Timepiece;
 }
 
 .App {

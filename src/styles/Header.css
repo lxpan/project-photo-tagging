@@ -4,16 +4,6 @@
     --header-title-colour-h2: #fdd978;
 }
 
-@font-face {
-    font-family: "Timepiece";
-    src: url('../assets/fonts/timepiece/Timepiece.ttf');
-    /* src: url('../assets/fonts/timepiece/TimepieceItalic.ttf'); */
-}
-
-body {
-    font-family: Timepiece;
-}
-
 .header-container {
     display: flex;
     flex-direction: column;
