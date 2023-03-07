@@ -1,7 +1,7 @@
 :root {
     --header-background-colour: #605542;
-    --header-title-colour-h1: #fdd978;
-    --header-title-colour-h2: #80acaa;
+    --header-title-colour-h1: #80acaa;
+    --header-title-colour-h2: #fdd978;
 }
 
 @font-face {
