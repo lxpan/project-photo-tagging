@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ContextMenu from '../styles/styles';
 
 function MenuContext({ photoImg }) {
     const [clicked, setClicked] = useState(false);
@@ -29,6 +30,16 @@ function MenuContext({ photoImg }) {
             }}
         >
             {photoImg}
+            {clicked && (
+                <ContextMenu top={points.y - (50 + 50)} left={points.x}>
+                    <ul>
+                        <li>wally ⛑️</li>
+                        <li>deimos 😈</li>
+                        <li>snuffy 🐈</li>
+                        <li>leo 🐈</li>
+                    </ul>
+                </ContextMenu>
+            )}
         </div>
     );
 }

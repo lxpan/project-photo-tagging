@@ -10,4 +10,5 @@
     max-width: 100%;
     object-fit: cover;
     z-index: 1;
+    background-color: rgba(253, 217, 120, 0.5);
 }
