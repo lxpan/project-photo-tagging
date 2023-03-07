@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import {
     getFirestore, collection, doc, getDocs, setDoc, deleteDoc,
 } from 'firebase/firestore';
+import { motion } from 'framer-motion';
 // Components
 import Header from './components/Header';
 import Canvas from './components/Canvas';
@@ -26,13 +27,50 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-console.log(db);
+// console.log(db);
 
 function App() {
+    const [mousePosition, setMousePosition] = useState({
+        x: 0,
+        y: 0,
+    });
+    // console.log(mousePosition);
+
+    useEffect(() => {
+        const moveCursor = (e) => {
+            setMousePosition({
+                x: e.clientX,
+                y: e.clientY,
+            });
+        };
+
+        window.addEventListener('mousemove', moveCursor);
+
+        return () => {
+            window.removeEventListener('mousemove', moveCursor);
+        };
+    }, []);
+
+    const variantsInner = {
+        default: {
+            x: mousePosition.x - 5,
+            y: mousePosition.y - 5,
+        },
+    };
+
+    const variantsOuter = {
+        default: {
+            x: mousePosition.x - 25,
+            y: mousePosition.y - 25,
+        },
+    };
+
     return (
         <div className="App">
             <Header />
             <Canvas />
+            <motion.div className="inner-cursor" variants={variantsInner} animate="default" />
+            <motion.div className="outer-cursor" variants={variantsOuter} animate="default" />
         </div>
     );
 }
