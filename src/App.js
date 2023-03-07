@@ -4,7 +4,6 @@ import { initializeApp } from 'firebase/app';
 import {
     getFirestore, collection, doc, getDocs, setDoc, deleteDoc,
 } from 'firebase/firestore';
-import { motion } from 'framer-motion';
 // Components
 import Header from './components/Header';
 import Canvas from './components/Canvas';
