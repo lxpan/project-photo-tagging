@@ -1,36 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Canvas.css';
 import wallyPhoto from '../assets/photos/steampunk-wally.jpeg';
+import MenuContext from './MenuContext';
 
 function Canvas() {
-    const [clicked, setClicked] = useState(false);
-    const [points, setPoints] = useState({
-        x: 0,
-        y: 0,
-    });
-
-    useEffect(() => {
-        const handleClick = () => setClicked(false);
-        window.addEventListener('click', handleClick);
-        return () => {
-            window.removeEventListener('click', handleClick);
-        };
-    }, []);
+    const img = <img src={wallyPhoto} alt="" />;
 
     return (
-        <div
-            className="canvas-container"
-            onContextMenu={(e) => {
-                e.preventDefault();
-                setClicked(true);
-                setPoints({
-                    x: e.pageX,
-                    y: e.pageY,
-                });
-                console.log('Right Click', e.pageX, e.pageY);
-            }}
-        >
-            <img src={wallyPhoto} alt="" />
+        <div className="canvas-container">
+            <MenuContext photoImg={img} />
         </div>
     );
 }
