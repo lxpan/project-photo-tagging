@@ -53,8 +53,8 @@ function App() {
 
     const variantsInner = {
         default: {
-            x: mousePosition.x - 5,
-            y: mousePosition.y - 5,
+            x: mousePosition.x - 3,
+            y: mousePosition.y - 3,
         },
     };
 
