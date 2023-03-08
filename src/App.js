@@ -4,6 +4,8 @@ import { initializeApp } from 'firebase/app';
 import {
     getFirestore, collection, doc, getDocs, setDoc, deleteDoc,
 } from 'firebase/firestore';
+// Firestore methods
+import FirestoreFactory from './Firestore';
 // Components
 import Header from './components/Header';
 import Canvas from './components/Canvas';
@@ -25,9 +27,13 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// const app = initializeApp(firebaseConfig);
+// const db = getFirestore(app);
 // console.log(db);
+const fs = FirestoreFactory('characters');
+
+fs.writeDocument('Wally', { loc: [50, 50] });
+fs.getDocuments().then((results) => console.log(results));
 
 function App() {
     return (
