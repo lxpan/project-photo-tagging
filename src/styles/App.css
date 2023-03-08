@@ -17,7 +17,6 @@ body {
 }
 
 .App {
-    display: grid;
-    /* grid-template-rows: 5% 1fr; */
-    grid-template-rows: 100px 1fr;
+    display: flex;
+    flex-direction: column;
 }

@@ -11,6 +11,7 @@
     align-items: center;
     background-color: var(--header-background-colour);
     position: relative;
+    padding: 10px 0 10px 0;
 }
 
 .header-title-h1 {
