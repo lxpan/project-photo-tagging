@@ -1,6 +1,6 @@
 import FirestoreFactory from './Firestore';
 
-describe.skip('Firestore can write and read character validation data', () => {
+describe('Test Firestore connectivity, including read & write operations', () => {
     let fs;
     beforeEach(() => {
         fs = new FirestoreFactory('characters');
@@ -34,8 +34,6 @@ describe.skip('Firestore can write and read character validation data', () => {
         expect(res.test).toBeDefined();
     });
 });
-
-// describe('Validate character is at location using Firestore', () => {
 //     test('Character is in selection box', async () => {
 //         const fs = new FirestoreFactory('characters');
 //         const cursorX = 25;
@@ -75,7 +73,7 @@ describe('Validate character is at location using Firestore', () => {
         expect(result).toBe(true);
     });
 
-    test('Character is outside selection box', async () => {
+    test('Character is outside selection circle', async () => {
         const fs = new FirestoreFactory('characters');
         const cursorX = 10;
         const cursorY = 10;
