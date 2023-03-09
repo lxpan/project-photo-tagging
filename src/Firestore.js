@@ -19,7 +19,6 @@ export default function FirestoreFactory(collectionName) {
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     const _collection = collectionName;
-    let characters;
 
     // Saves a new message to Cloud Firestore.
     async function writeDocument(documentName, documentJSON) {
