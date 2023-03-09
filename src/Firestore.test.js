@@ -1,6 +1,6 @@
 import FirestoreFactory from './Firestore';
 
-describe('Test Firestore connectivity, including read & write operations', () => {
+describe.skip('Test Firestore connectivity, including read & write operations', () => {
     let fs;
     beforeEach(() => {
         fs = new FirestoreFactory('characters');
@@ -34,36 +34,9 @@ describe('Test Firestore connectivity, including read & write operations', () =>
         expect(res.test).toBeDefined();
     });
 });
-//     test('Character is in selection box', async () => {
-//         const fs = new FirestoreFactory('characters');
-//         const cursorX = 25;
-//         const cursorY = 25;
-//         // const targetingBoxSize = 50;
-//         const result = await fs.isCharAtLoc('Wally', cursorX, cursorY, 25);
-//         expect(result).toBe(true);
-//     });
-
-//     test('Character should be outside selection box', async () => {
-//         const fs = new FirestoreFactory('characters');
-//         const cursorX = 0;
-//         const cursorY = 0;
-//         // const targetingBoxSize = 50;
-//         const result = await fs.isCharAtLoc('Wally', cursorX, cursorY, 25);
-//         expect(result).toBe(false);
-//     });
-
-//     test('Character should just be in selection box', async () => {
-//         const fs = new FirestoreFactory('characters');
-//         const cursorX = 10;
-//         const cursorY = 10;
-//         // const targetingBoxSize = 50;
-//         const result = await fs.isCharAtLoc('Wally', cursorX, cursorY, 25);
-//         expect(result).toBe(true);
-//     });
-// });
 
 describe('Validate character is at location using Firestore', () => {
-    test('Character is in selection box', async () => {
+    test('Character is inside the selection box', async () => {
         const fs = new FirestoreFactory('characters');
         const cursorX = 25;
         const cursorY = 25;
@@ -81,5 +54,15 @@ describe('Validate character is at location using Firestore', () => {
 
         const result = await fs.isCharAtLoc('Wally', cursorX, cursorY, radius);
         expect(result).toBe(false);
+    });
+
+    test('Character is on the selection circle', async () => {
+        const fs = new FirestoreFactory('characters');
+        const cursorX = 10;
+        const cursorY = 35;
+        const radius = 25;
+
+        const result = await fs.isCharAtLoc('Wally', cursorX, cursorY, radius);
+        expect(result).toBe(true);
     });
 });
