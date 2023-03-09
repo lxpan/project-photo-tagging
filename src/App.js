@@ -1,10 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
-import {
-    getFirestore, collection, doc, getDocs, setDoc, deleteDoc,
-} from 'firebase/firestore';
-// Firestore methods
 import FirestoreFactory from './Firestore';
 // Components
 import Header from './components/Header';
@@ -13,27 +7,9 @@ import MouseCursor from './components/MouseCursor';
 // CSS
 import './styles/App.css';
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-    apiKey: 'AIzaSyDpAI5r_jWjU1aNFIqONr_sdHrDJAX7VP0',
-    authDomain: 'wheres-wally-789b9.firebaseapp.com',
-    projectId: 'wheres-wally-789b9',
-    storageBucket: 'wheres-wally-789b9.appspot.com',
-    messagingSenderId: '906692154300',
-    appId: '1:906692154300:web:327b1ae82ad7d4f58bd1b9',
-};
-
-// Initialize Firebase
-// const app = initializeApp(firebaseConfig);
-// const db = getFirestore(app);
-// console.log(db);
-const fs = FirestoreFactory('characters');
-
-fs.writeDocument('Wally', { loc: [50, 50] });
-fs.getDocuments().then((results) => console.log(results));
+// const fs = FirestoreFactory('characters');
+// fs.writeDocument('Wally', { loc: [35, 35] });
+// fs.getDocuments().then((results) => console.log(results));
 
 function App() {
     return (
