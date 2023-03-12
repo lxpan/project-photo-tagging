@@ -82,8 +82,14 @@ function MenuContext({ photoImg }) {
         console.log(baseCursorX, baseCursorY);
         console.log(baseReticleRadius);
 
-        const result = await fs.isCharAtLoc('Wally', baseCursorX, baseCursorY, baseReticleRadius);
+        const result = await fs.isCharAtLoc(charName, baseCursorX, baseCursorY, baseReticleRadius);
         console.log(`Is ${charName} here? ${result}`);
+        if (result) {
+            alert(`You have found ${charName}`);
+        }
+        else {
+            alert('They are not here!');
+        }
     };
 
     return (
@@ -103,11 +109,13 @@ function MenuContext({ photoImg }) {
             {clicked && (
                 <ContextMenu top={points.y - (50 + 50)} left={points.x}>
                     <ul>
-                        <li onClick={validateCharAtLoc} id="wally">
+                        <li onClick={validateCharAtLoc} id="Wally">
                             wally ⛑️
                         </li>
                         <li id="deimos">deimos 😈</li>
-                        <li id="snuffy">snuffy 🐈</li>
+                        <li onClick={validateCharAtLoc} id="snuffy">
+                            snuffy 🐈
+                        </li>
                         <li id="leo">leo 🐈</li>
                     </ul>
                 </ContextMenu>
