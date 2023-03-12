@@ -52,7 +52,7 @@ function MenuContext({ photoImg }) {
     };
 
     // project actual size display cursor reticle image on base image
-    const selectionCircleBaseDims = (targetReticleCssRadius) => {
+    const selectionCircleBaseRadius = (targetReticleCssRadius) => {
         const canvas = document.querySelector('.canvas-container');
         const canvasWidth = canvas.clientWidth;
         const canvasHeight = canvas.clientHeight;
@@ -63,7 +63,7 @@ function MenuContext({ photoImg }) {
 
         console.log(`Shrink factor X & Y: ${shrinkFactorX}, ${shrinkFactorY}`);
         // use X factor as the Y is slightly perturbed by header size strangeness
-        return shrinkFactorX * targetReticleCssRadius;
+        return (shrinkFactorX * targetReticleCssRadius) / 2;
     };
 
     const validateCharAtLoc = async (e) => {
@@ -71,19 +71,19 @@ function MenuContext({ photoImg }) {
         // todo: this wall have to be converted too
         const selectionCircleCssSize = 50;
 
-        const result = await fs.isCharAtLoc('Wally', e.pageX, e.pageY, selectionCircleCssSize);
-        console.log(`Is ${charName} here? ${result}`);
         // console.log(charName);
         // const docs = await fs.getDocuments();
         // console.log(docs);
 
         const [propWidth, propHeight] = getPropCursorCoords(e.pageX, e.pageY);
-        const baseCoords = mapPropCoordsToOriginal(propWidth, propHeight);
+        const [baseCursorX, baseCursorY] = mapPropCoordsToOriginal(propWidth, propHeight);
+        const baseReticleRadius = selectionCircleBaseRadius(selectionCircleCssSize);
 
-        console.log(baseCoords);
+        console.log(baseCursorX, baseCursorY);
+        console.log(baseReticleRadius);
 
-        const reticleSizeActual = selectionCircleBaseDims(selectionCircleCssSize);
-        console.log(reticleSizeActual);
+        const result = await fs.isCharAtLoc('Wally', baseCursorX, baseCursorY, baseReticleRadius);
+        console.log(`Is ${charName} here? ${result}`);
     };
 
     return (
