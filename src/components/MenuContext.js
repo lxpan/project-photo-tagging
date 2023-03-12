@@ -62,6 +62,8 @@ function MenuContext({ photoImg }) {
         const shrinkFactorY = imgHeight / canvasHeight;
 
         console.log(`Shrink factor X & Y: ${shrinkFactorX}, ${shrinkFactorY}`);
+        // use X factor as the Y is slightly perturbed by header size strangeness
+        return shrinkFactorX * targetReticleCssRadius;
     };
 
     const validateCharAtLoc = async (e) => {
@@ -79,7 +81,9 @@ function MenuContext({ photoImg }) {
         const baseCoords = mapPropCoordsToOriginal(propWidth, propHeight);
 
         console.log(baseCoords);
-        selectionCircleBaseDims(selectionCircleCssSize);
+
+        const reticleSizeActual = selectionCircleBaseDims(selectionCircleCssSize);
+        console.log(reticleSizeActual);
     };
 
     return (
