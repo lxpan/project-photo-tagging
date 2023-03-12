@@ -8,7 +8,8 @@
     position: relative;
     width: auto;
     max-width: 100%;
-    object-fit: cover;
+    align-self: center;
+    flex: 0 0 auto;
     z-index: 1;
     background-color: rgba(253, 217, 120, 0.5);
 }
