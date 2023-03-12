@@ -11,6 +11,9 @@ function MenuContext({ photoImg }) {
         y: 0,
     });
 
+    const imgWidth = 5356;
+    const imgHeight = 4961;
+
     useEffect(() => {
         const handleClick = () => setClicked(false);
         window.addEventListener('click', handleClick);
@@ -48,12 +51,25 @@ function MenuContext({ photoImg }) {
         return [baseX, baseY];
     };
 
+    // project actual size display cursor reticle image on base image
+    const selectionCircleBaseDims = (targetReticleCssRadius) => {
+        const canvas = document.querySelector('.canvas-container');
+        const canvasWidth = canvas.clientWidth;
+        const canvasHeight = canvas.clientHeight;
+
+        // factor of 2 means "half the size"
+        const shrinkFactorX = imgWidth / canvasWidth;
+        const shrinkFactorY = imgHeight / canvasHeight;
+
+        console.log(`Shrink factor X & Y: ${shrinkFactorX}, ${shrinkFactorY}`);
+    };
+
     const validateCharAtLoc = async (e) => {
         const charName = e.currentTarget.id;
         // todo: this wall have to be converted too
-        const selectionCircleSize = 50;
+        const selectionCircleCssSize = 50;
 
-        const result = await fs.isCharAtLoc('Wally', e.pageX, e.pageY, selectionCircleSize);
+        const result = await fs.isCharAtLoc('Wally', e.pageX, e.pageY, selectionCircleCssSize);
         console.log(`Is ${charName} here? ${result}`);
         // console.log(charName);
         // const docs = await fs.getDocuments();
@@ -63,6 +79,7 @@ function MenuContext({ photoImg }) {
         const baseCoords = mapPropCoordsToOriginal(propWidth, propHeight);
 
         console.log(baseCoords);
+        selectionCircleBaseDims(selectionCircleCssSize);
     };
 
     return (
