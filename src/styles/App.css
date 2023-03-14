@@ -13,10 +13,12 @@
 }
 
 body {
-    width: 100%;
+    width: 1920px;
+    height: calc(1870px + 86px);
 }
 
 .App {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
