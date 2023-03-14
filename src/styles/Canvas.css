@@ -11,5 +11,11 @@
     align-self: center;
     flex: 0 0 auto;
     z-index: 1;
-    background-color: rgba(253, 217, 120, 0.5);
+    /* background-color: rgba(253, 217, 120, 0.5); */
+}
+
+#canvas {
+    position: absolute;
+    z-index: 999;
+    pointer-events: none;
 }
