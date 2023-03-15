@@ -18,8 +18,11 @@ function Canvas() {
             ctx.strokeStyle = 'lightgreen';
             ctx.lineWidth = 1.5;
 
-            Object.values(backendBoundingBox).forEach((chara) => {
-                ctx.strokeRect(chara.x, chara.y, chara.w, chara.h);
+            Object.entries(backendBoundingBox).forEach(([charName, box]) => {
+                if (charName.toLowerCase().includes('test')) {
+                    return;
+                }
+                ctx.strokeRect(box.x, box.y, box.w, box.h);
             });
         };
 
