@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/Canvas.css';
 import wallyPhoto from '../assets/photos/steampunk-wally.jpeg';
 import MenuContext from './MenuContext';
+import FirestoreFactory from '../Firestore';
 
 const boundingBoxes = {
     deimos: {
@@ -36,14 +37,26 @@ function Canvas() {
     const img = <img src={wallyPhoto} alt="" />;
 
     useEffect(() => {
+        const fs = new FirestoreFactory('characters');
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        ctx.strokeStyle = 'lightgreen';
-        ctx.lineWidth = 1.5;
 
-        Object.values(boundingBoxes).forEach((chara) => {
-            ctx.strokeRect(chara.x, chara.y, chara.w, chara.h);
-        });
+        const getBoundingBox = async () => {
+            const backendBoundingBox = await fs.getDocuments();
+
+            ctx.strokeStyle = 'lightgreen';
+            ctx.lineWidth = 1.5;
+
+            Object.values(backendBoundingBox).forEach((chara) => {
+                ctx.strokeRect(chara.x, chara.y, chara.w, chara.h);
+            });
+        };
+
+        getBoundingBox();
+
+        // Object.values(boundingBoxes).forEach((chara) => {
+        //     ctx.strokeRect(chara.x, chara.y, chara.w, chara.h);
+        // });
     }, []);
 
     return (
