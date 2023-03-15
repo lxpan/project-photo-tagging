@@ -62,23 +62,57 @@ export default function FirestoreFactory(collectionName) {
         }
     }
 
-    // Compare radius of circle with distance of its center from given point
-    function isInsideCircle(circleX, circleY, radius, x, y) {
-        // circle formula (X^2 + Y^2 = radius^2)
-        // becomes: (X-x)^2 + (Y-y)^2 <= radius
-        if ((x - circleX) * (x - circleX) + (y - circleY) * (y - circleY) <= radius * radius) {
+    // return true if the rectangle and circle are colliding
+    function rectCircleColliding(circle, rect) {
+        const distX = Math.abs(circle.x - rect.x - rect.w / 2);
+        const distY = Math.abs(circle.y - rect.y - rect.h / 2);
+
+        if (distX > rect.w / 2 + circle.r) {
+            return false;
+        }
+        if (distY > rect.h / 2 + circle.r) {
+            return false;
+        }
+
+        if (distX <= rect.w / 2) {
             return true;
         }
-        return false;
+        if (distY <= rect.h / 2) {
+            return true;
+        }
+
+        const dx = distX - rect.w / 2;
+        const dy = distY - rect.h / 2;
+        return dx * dx + dy * dy <= circle.r * circle.r;
     }
 
     async function isCharAtLoc(charName, cursorX, cursorY, targetRadius) {
         try {
             const characterLocs = await getDocuments();
-            const charLoc = characterLocs[charName].loc;
-            const [charX, charY] = charLoc;
+            const charLoc = characterLocs[charName];
 
-            if (isInsideCircle(cursorX, cursorY, targetRadius, charX, charY)) {
+            const {
+                x, y, w, h,
+            } = charLoc;
+
+            const rect = {
+                x,
+                y,
+                w,
+                h,
+            };
+
+            const circle = {
+                x: cursorX,
+                y: cursorY,
+                r: targetRadius,
+            };
+
+            console.log('Cursor:', cursorX, cursorY);
+            console.log('Rect:', rect);
+            console.log('Circle:', circle);
+
+            if (rectCircleColliding(circle, rect)) {
                 return true;
             }
             return false;

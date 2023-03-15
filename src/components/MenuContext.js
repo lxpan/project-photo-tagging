@@ -11,9 +11,6 @@ function MenuContext({ photoImg }) {
         y: 0,
     });
 
-    const imgWidth = 5356;
-    const imgHeight = 4961;
-
     useEffect(() => {
         const handleClick = () => setClicked(false);
         window.addEventListener('click', handleClick);
@@ -22,73 +19,20 @@ function MenuContext({ photoImg }) {
         };
     }, []);
 
-    // returns the proportional (to container height/width) coords
-    const getPropCursorCoords = (cursorX, cursorY) => {
-        const header = document.querySelector('.header-container');
-        const headerHeight = header.clientHeight;
-
-        const canvas = document.querySelector('.canvas-container');
-        const canvasWidth = canvas.clientWidth;
-        const canvasHeight = canvas.clientHeight;
-
-        const propWidth = cursorX / canvasWidth;
-        // subtract the header height to get the true canvas only height
-        const propHeight = (cursorY - headerHeight) / canvasHeight;
-        // console.log('Cursor coords', cursorX, cursorY);
-        // console.log('Props coords', propWidth, propHeight);
-
-        return [propWidth, propHeight];
-    };
-
-    // converts a set of proportional image coordinates to actual size coordinates (base coords)
-    const mapPropCoordsToOriginal = (pWidth, pHeight) => {
-        // size of the actual Where's Wally image
-        const imgWidth = 5356;
-        const imgHeight = 4961;
-        // convert the proportional (relative) coordinates to full blown sizes
-        const baseX = pWidth * imgWidth;
-        const baseY = pHeight * imgHeight;
-        return [baseX, baseY];
-    };
-
-    // project actual size display cursor reticle image on base image
-    const selectionCircleBaseRadius = (targetReticleCssRadius) => {
-        const canvas = document.querySelector('.canvas-container');
-        const canvasWidth = canvas.clientWidth;
-        const canvasHeight = canvas.clientHeight;
-
-        // factor of 2 means "half the size"
-        const shrinkFactorX = imgWidth / canvasWidth;
-        const shrinkFactorY = imgHeight / canvasHeight;
-
-        console.log(`Shrink factor X & Y: ${shrinkFactorX}, ${shrinkFactorY}`);
-        // use X factor as the Y is slightly perturbed by header size strangeness
-        return (shrinkFactorX * targetReticleCssRadius) / 2;
-    };
-
     const validateCharAtLoc = async (e) => {
+        const toTitleCase = (name) => name[0].toUpperCase() + name.slice(1);
+
         const charName = e.currentTarget.id;
-        // todo: this wall have to be converted too
-        const selectionCircleCssSize = 50;
+        const selectionCircleCssRadius = 25;
 
-        // console.log(charName);
-        // const docs = await fs.getDocuments();
-        // console.log(docs);
+        const result = await fs.isCharAtLoc(charName, points.x, points.y, selectionCircleCssRadius);
 
-        const [propWidth, propHeight] = getPropCursorCoords(e.pageX, e.pageY);
-        const [baseCursorX, baseCursorY] = mapPropCoordsToOriginal(propWidth, propHeight);
-        const baseReticleRadius = selectionCircleBaseRadius(selectionCircleCssSize);
-
-        console.log(baseCursorX, baseCursorY);
-        console.log(baseReticleRadius);
-
-        const result = await fs.isCharAtLoc(charName, baseCursorX, baseCursorY, baseReticleRadius);
         console.log(`Is ${charName} here? ${result}`);
-        if (result) {
-            alert(`You have found ${charName}`);
+        if (result === true) {
+            alert(`You have found ${toTitleCase(charName)}!`);
         }
         else {
-            alert('They are not here!');
+            alert(`${toTitleCase(charName)} is not here!`);
         }
     };
 
@@ -102,21 +46,27 @@ function MenuContext({ photoImg }) {
                     x: e.pageX,
                     y: e.pageY,
                 });
-                // console.log('Right Click', e.pageX, e.pageY);
+                // NB: the cursor location assigned to points state should be used above
+                // and NOTE the cursor locations at validateCharAtLoc (event object from <li>)
+                console.log('Right Click', e.pageX, e.pageY);
             }}
         >
             {photoImg}
             {clicked && (
                 <ContextMenu top={points.y - (50 + 50)} left={points.x}>
                     <ul>
-                        <li onClick={validateCharAtLoc} id="Wally">
+                        <li onClick={validateCharAtLoc} id="wally">
                             wally ⛑️
                         </li>
-                        <li id="deimos">deimos 😈</li>
+                        <li onClick={validateCharAtLoc} id="deimos">
+                            deimos 😈
+                        </li>
                         <li onClick={validateCharAtLoc} id="snuffy">
                             snuffy 🐈
                         </li>
-                        <li id="leo">leo 🐈</li>
+                        <li onClick={validateCharAtLoc} id="leo">
+                            leo 🐈
+                        </li>
                     </ul>
                 </ContextMenu>
             )}
