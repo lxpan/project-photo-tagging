@@ -90,6 +90,7 @@ export default function FirestoreFactory(collectionName) {
         try {
             const characterLocs = await getDocuments();
             const charLoc = characterLocs[charName];
+            // console.log(charLoc);
 
             const {
                 x, y, w, h,
@@ -108,9 +109,9 @@ export default function FirestoreFactory(collectionName) {
                 r: targetRadius,
             };
 
-            console.log('Cursor:', cursorX, cursorY);
-            console.log('Rect:', rect);
-            console.log('Circle:', circle);
+            // console.log('Cursor:', cursorX, cursorY);
+            // console.log('Rect:', rect);
+            // console.log('Circle:', circle);
 
             if (rectCircleColliding(circle, rect)) {
                 return true;

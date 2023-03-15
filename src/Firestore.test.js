@@ -10,11 +10,16 @@ describe.skip('Test Firestore connectivity, including read & write operations', 
         expect(fs).toBeDefined();
     });
 
-    test('Write character doc', () => {
-        fs.writeDocument('test', {
-            name: 'Wally',
-            loc: [100, 100],
+    test('Write character doc', async () => {
+        fs.writeDocument('connectivityTest', {
+            x: 50,
+            y: 50,
+            w: 50,
+            h: 50,
         });
+
+        const docs = await fs.getDocuments();
+        expect(docs.connectivityTest).toBeDefined();
     });
 
     test('Delete character doc', async () => {
@@ -29,40 +34,50 @@ describe.skip('Test Firestore connectivity, including read & write operations', 
     });
 
     test('Retrieve existing data in collection', async () => {
-        const res = await fs.getDocuments();
-        // console.log(res);
-        expect(res.test).toBeDefined();
+        const docs = await fs.getDocuments();
+        expect(Object.values(docs).length).toBe(6);
     });
 });
 
 describe('Validate character is at location using Firestore', () => {
-    test('Character is inside the selection box', async () => {
-        const fs = new FirestoreFactory('characters');
-        const cursorX = 25;
-        const cursorY = 25;
-        const radius = 25;
+    let testCharName;
+    let selectionRadius;
+    let fs;
+    beforeEach(() => {
+        testCharName = 'testChar';
+        selectionRadius = 25;
+        fs = new FirestoreFactory('characters');
+    });
 
-        const result = await fs.isCharAtLoc('Wally', cursorX, cursorY, radius);
+    test('Character bounding box (BB) inside selection circle', async () => {
+        const cursorX = 150;
+        const cursorY = 150;
+
+        const result = await fs.isCharAtLoc(testCharName, cursorX, cursorY, selectionRadius);
         expect(result).toBe(true);
     });
 
-    test('Character is outside selection circle', async () => {
-        const fs = new FirestoreFactory('characters');
-        const cursorX = 10;
-        const cursorY = 10;
-        const radius = 25;
+    test('Character BB is on the edge of selection circle', async () => {
+        const cursorX = 75;
+        const cursorY = 100;
 
-        const result = await fs.isCharAtLoc('Wally', cursorX, cursorY, radius);
+        const result = await fs.isCharAtLoc(testCharName, cursorX, cursorY, selectionRadius);
+        expect(result).toBe(true);
+    });
+
+    test('Character BB is completely outside selection circle', async () => {
+        const cursorX = 50;
+        const cursorY = 50;
+
+        const result = await fs.isCharAtLoc(testCharName, cursorX, cursorY, selectionRadius);
         expect(result).toBe(false);
     });
 
-    test('Character is on the selection circle', async () => {
-        const fs = new FirestoreFactory('characters');
-        const cursorX = 10;
-        const cursorY = 35;
-        const radius = 25;
+    test('Character BB is just outside selection circle', async () => {
+        const cursorX = 74;
+        const cursorY = 100;
 
-        const result = await fs.isCharAtLoc('Wally', cursorX, cursorY, radius);
-        expect(result).toBe(true);
+        const result = await fs.isCharAtLoc(testCharName, cursorX, cursorY, selectionRadius);
+        expect(result).toBe(false);
     });
 });
