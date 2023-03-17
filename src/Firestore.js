@@ -3,6 +3,7 @@ import { initializeApp } from 'firebase/app';
 import {
     getFirestore, collection, doc, getDocs, setDoc, deleteDoc,
 } from 'firebase/firestore/lite';
+import boundingBoxes from './charBoxes';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -39,6 +40,15 @@ export default function FirestoreFactory(collectionName) {
         catch (error) {
             console.error('Error writing new project to Firebase Database', error);
         }
+    }
+
+    function writeBoundingBoxes() {
+        const fs = FirestoreFactory('characters');
+        Object.entries(boundingBoxes).forEach(([key, value]) => {
+            fs.writeDocument(key, value);
+        });
+
+        fs.getDocuments().then((results) => console.log(results));
     }
 
     async function getDocuments() {
