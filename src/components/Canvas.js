@@ -32,7 +32,7 @@ function Canvas() {
         const toTitleCase = (name) => name[0].toUpperCase() + name.slice(1);
 
         const _charName = e.currentTarget.id;
-        setActiveCharacter(_charName);
+        setActiveCharacter(toTitleCase(_charName));
         const selectionCircleCssRadius = 25;
 
         const result = await fs.isCharAtLoc(
