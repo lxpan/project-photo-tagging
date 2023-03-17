@@ -65,6 +65,7 @@ function Canvas() {
 
     return (
         <>
+            {/* This div contains both the underlying image and the right click context menu */}
             <div
                 className="canvas-container"
                 onContextMenu={(e) => {
