@@ -29,8 +29,7 @@ function Canvas() {
         }
     };
 
-    useEffect(() => {
-        // const fs = new FirestoreFactory('characters');
+    const drawBoundingBoxes = () => {
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
@@ -49,15 +48,15 @@ function Canvas() {
         };
 
         getBoundingBox();
+    };
 
-        // Object.values(boundingBoxes).forEach((chara) => {
-        //     ctx.strokeRect(chara.x, chara.y, chara.w, chara.h);
-        // });
-    }, []);
-
+    // Execute the following on component load
     useEffect(() => {
-        const handleClick = () => setClicked(false);
+        // display character bounding boxes
+        drawBoundingBoxes();
 
+        // Listen for right clicks and toggle `clicked` state
+        const handleClick = () => setClicked(false);
         window.addEventListener('click', handleClick);
         return () => {
             window.removeEventListener('click', handleClick);
