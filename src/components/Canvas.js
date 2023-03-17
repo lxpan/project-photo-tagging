@@ -2,30 +2,49 @@ import React, { useState, useEffect } from 'react';
 import '../styles/Canvas.css';
 import wallyPhoto from '../assets/photos/steampunk-wally.jpeg';
 import MenuContext from './MenuContext';
+import Modal from './Modal';
 import FirestoreFactory from '../Firestore';
 
 function Canvas() {
+    const fs = new FirestoreFactory('characters');
     const [clicked, setClicked] = useState(false);
     const [points, setPoints] = useState({
         x: 0,
         y: 0,
     });
-    const fs = new FirestoreFactory('characters');
+    const [modal, setModal] = useState(false);
+
+    const toggleModal = () => {
+        setModal(!modal);
+    };
+
+    const [activeCharacter, setActiveCharacter] = useState(null);
+    const [foundStatus, setFoundStatus] = useState(false);
 
     const validateCharAtLoc = async (e) => {
         const toTitleCase = (name) => name[0].toUpperCase() + name.slice(1);
 
-        const charName = e.currentTarget.id;
+        const _charName = e.currentTarget.id;
+        setActiveCharacter(_charName);
         const selectionCircleCssRadius = 25;
 
-        const result = await fs.isCharAtLoc(charName, points.x, points.y, selectionCircleCssRadius);
+        const result = await fs.isCharAtLoc(
+            _charName,
+            points.x,
+            points.y,
+            selectionCircleCssRadius,
+        );
 
         // console.log(`Is ${charName} here? ${result}`);
         if (result === true) {
-            alert(`You have found ${toTitleCase(charName)}!`);
+            // alert(`You have found ${toTitleCase(charName)}!`);
+            setFoundStatus(true);
+            toggleModal();
         }
         else {
-            alert(`${toTitleCase(charName)} is not here!`);
+            setFoundStatus(false);
+            toggleModal();
+            // alert(`${toTitleCase(charName)} is not here!`);
         }
     };
 
@@ -83,6 +102,9 @@ function Canvas() {
                 <img src={wallyPhoto} alt="" />
                 {clicked && <MenuContext points={points} validateCharAtLoc={validateCharAtLoc} />}
             </div>
+            {modal && (
+                <Modal toggleModal={toggleModal} charName={activeCharacter} isFound={foundStatus} />
+            )}
             <canvas id="canvas" width={1920} height={1870}></canvas>
         </>
     );

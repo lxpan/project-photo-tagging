@@ -4,6 +4,7 @@ import FirestoreFactory from './Firestore';
 import Header from './components/Header';
 import Canvas from './components/Canvas';
 import MouseCursor from './components/MouseCursor';
+import Modal from './components/Modal';
 // CSS
 import './styles/App.css';
 
