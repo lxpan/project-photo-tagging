@@ -20,7 +20,7 @@ function Canvas() {
 
         const result = await fs.isCharAtLoc(charName, points.x, points.y, selectionCircleCssRadius);
 
-        console.log(`Is ${charName} here? ${result}`);
+        // console.log(`Is ${charName} here? ${result}`);
         if (result === true) {
             alert(`You have found ${toTitleCase(charName)}!`);
         }
