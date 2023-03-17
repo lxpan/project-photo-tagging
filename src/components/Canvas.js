@@ -18,6 +18,13 @@ function Canvas() {
         setModal(!modal);
     };
 
+    if (modal) {
+        document.body.classList.add('active-modal');
+    }
+    else {
+        document.body.classList.remove('active-modal');
+    }
+
     const [activeCharacter, setActiveCharacter] = useState(null);
     const [foundStatus, setFoundStatus] = useState(false);
 
