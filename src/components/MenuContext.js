@@ -3,9 +3,9 @@ import ContextMenu from '../styles/MenuContextStyle';
 
 const CHARACTERS = {
     wally: 'wally ⛑️',
-    deimos: 'deimos 😈',
-    snuffy: 'snuffy 🐈',
     leo: 'leo 🐈',
+    snuffy: 'snuffy 🐈',
+    deimos: 'deimos 😈',
 };
 
 function MenuContext({ points, validateCharAtLoc }) {
