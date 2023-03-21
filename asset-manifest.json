@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/project-photo-tagging/static/css/main.31596d61.css",
-    "main.js": "/project-photo-tagging/static/js/main.edc6aeda.js",
+    "main.js": "/project-photo-tagging/static/js/main.47f1b624.js",
     "static/media/steampunk-wally.jpeg": "/project-photo-tagging/static/media/steampunk-wally.9a55bf038236e9b283da.jpeg",
     "static/media/Timepiece.ttf": "/project-photo-tagging/static/media/Timepiece.359557ef5c3d199e3946.ttf",
     "index.html": "/project-photo-tagging/index.html",
     "main.31596d61.css.map": "/project-photo-tagging/static/css/main.31596d61.css.map",
-    "main.edc6aeda.js.map": "/project-photo-tagging/static/js/main.edc6aeda.js.map"
+    "main.47f1b624.js.map": "/project-photo-tagging/static/js/main.47f1b624.js.map"
   },
   "entrypoints": [
     "static/css/main.31596d61.css",
-    "static/js/main.edc6aeda.js"
+    "static/js/main.47f1b624.js"
   ]
 }
