@@ -4,8 +4,8 @@ import '../styles/Modal.css';
 function VictoryModal({ toggleVictoryModal }) {
     const showModalMessage = () => (
         <>
-            <h2 className="modal-content-heading">Welcome!</h2>
-            <p className="modal-content-text">Congratulations, you have found them all!</p>
+            <h2 className="modal-content-heading">Congratulations!</h2>
+            <p className="modal-content-text">You have found them all!</p>
         </>
     );
 
