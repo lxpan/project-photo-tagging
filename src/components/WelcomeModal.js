@@ -11,7 +11,7 @@ function WelcomeModal({ toggleWelcomeModal }) {
             </p>
             <h2 className="modal-content-heading">Hints</h2>
             <ul className="modal-content-ul">
-                <li>Wally is red and white</li>
+                <li>Wally is wearing red and white</li>
                 <li>Leo is a naughty cat</li>
                 <li>Snuffy is a curious cat</li>
                 <li>Deimos is a gargoyle</li>
