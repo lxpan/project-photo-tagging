@@ -2,7 +2,7 @@
     "name": "photo-tagging-app",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https://lxpan.github.io/photo-tagging-app",
+    "homepage": "https://lxpan.github.io/project-photo-tagging",
     "dependencies": {
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^13.4.0",
