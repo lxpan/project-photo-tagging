@@ -4,6 +4,7 @@ import wallyPhoto from '../assets/photos/steampunk-wally.jpeg';
 import MenuContext from './MenuContext';
 import Modal from './Modal';
 import WelcomeModal from './WelcomeModal';
+import VictoryModal from './VictoryModal';
 import FirestoreFactory from '../Firestore';
 
 function Canvas() {
@@ -16,9 +17,10 @@ function Canvas() {
 
     const [modal, setModal] = useState(false);
     const [welcomeModal, setWelcomeModal] = useState(true);
+    const [victoryModal, setVictoryModal] = useState(false);
+
     const [activeCharacter, setActiveCharacter] = useState(null);
     const [foundStatus, setFoundStatus] = useState(false);
-
     const [foundCharacters, setFoundCharacters] = useState({
         wally: false,
         leo: false,
@@ -32,6 +34,10 @@ function Canvas() {
 
     const toggleWelcomeModal = () => {
         setWelcomeModal(!welcomeModal);
+    };
+
+    const toggleVictoryModal = () => {
+        setVictoryModal(!victoryModal);
     };
 
     if (modal) {
@@ -62,8 +68,15 @@ function Canvas() {
             _found[_charName] = true;
             setFoundCharacters(_found);
             setFoundStatus(true);
-            toggleModal();
-            console.log(foundCharacters);
+
+            if (Object.values(foundCharacters).every((found) => found === true)) {
+                toggleVictoryModal();
+            }
+            else {
+                toggleModal();
+            }
+
+            // console.log(foundCharacters);
         }
         else {
             setFoundStatus(false);
@@ -122,13 +135,14 @@ function Canvas() {
                     });
                     // NB: the cursor location assigned to points state should be used above
                     // and NOTE the cursor locations at validateCharAtLoc (event object from <li>)
-                    console.log('Right Click', e.pageX, e.pageY);
+                    // console.log('Right Click', e.pageX, e.pageY);
                 }}
             >
                 <img src={wallyPhoto} alt="" />
                 {clicked && <MenuContext points={points} validateCharAtLoc={validateCharAtLoc} />}
             </div>
             {welcomeModal && <WelcomeModal toggleWelcomeModal={toggleWelcomeModal} />}
+            {victoryModal && <VictoryModal toggleVictoryModal={toggleVictoryModal} />}
             {modal && (
                 <Modal toggleModal={toggleModal} charName={activeCharacter} isFound={foundStatus} />
             )}
