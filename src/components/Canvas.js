@@ -13,8 +13,18 @@ function Canvas() {
         x: 0,
         y: 0,
     });
+
     const [modal, setModal] = useState(false);
     const [welcomeModal, setWelcomeModal] = useState(true);
+    const [activeCharacter, setActiveCharacter] = useState(null);
+    const [foundStatus, setFoundStatus] = useState(false);
+
+    const [foundCharacters, setFoundCharacters] = useState({
+        wally: false,
+        leo: false,
+        snuffy: false,
+        deimos: false,
+    });
 
     const toggleModal = () => {
         setModal(!modal);
@@ -30,9 +40,6 @@ function Canvas() {
     else {
         document.body.classList.remove('active-modal');
     }
-
-    const [activeCharacter, setActiveCharacter] = useState(null);
-    const [foundStatus, setFoundStatus] = useState(false);
 
     const validateCharAtLoc = async (e) => {
         const toTitleCase = (name) => name[0].toUpperCase() + name.slice(1);
@@ -51,8 +58,12 @@ function Canvas() {
         // console.log(`Is ${charName} here? ${result}`);
         if (result === true) {
             // alert(`You have found ${toTitleCase(charName)}!`);
+            const _found = foundCharacters;
+            _found[_charName] = true;
+            setFoundCharacters(_found);
             setFoundStatus(true);
             toggleModal();
+            console.log(foundCharacters);
         }
         else {
             setFoundStatus(false);
