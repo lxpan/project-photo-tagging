@@ -1,19 +1,32 @@
 import React from 'react';
 import '../styles/Modal.css';
 
-function Modal({ toggleModal, charName, isFound }) {
+function Modal({
+    toggleModal, charName, isFound, isWelcome,
+}) {
     const showModalMessage = (found) => {
+        if (isWelcome) {
+            return (
+                <>
+                    <h2 className="modal-content-heading">Welcome!</h2>
+                    <p className="modal-content-text">
+                        Your objective is to find Wally (Waldo), Snuffy, Leo and Deimos the
+                        Gargoyle.{' '}
+                    </p>
+                </>
+            );
+        }
         if (found) {
             return (
                 <>
-                    <h2 className="modal-content-heading">well done!</h2>
-                    <p className="modal-content-text">you have found {charName}!</p>
+                    <h2 className="modal-content-heading">Well done!</h2>
+                    <p className="modal-content-text">You have found {charName}!</p>
                 </>
             );
         }
         return (
             <>
-                <h2 className="modal-content-heading">try again!</h2>
+                <h2 className="modal-content-heading">Try again!</h2>
                 <p className="modal-content-text">{charName} is not there!</p>
             </>
         );

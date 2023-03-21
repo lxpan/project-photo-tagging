@@ -49,7 +49,12 @@ body.active-modal {
 }
 
 .modal-content-text,
-.modal-content-heading {
+.modal-content-heading,
+.modal-content-ul>li {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 2rem;
+    font-size: 1.1rem;
+}
+
+.modal-content-ul li {
+    list-style-type: none;
 }

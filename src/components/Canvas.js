@@ -3,6 +3,7 @@ import '../styles/Canvas.css';
 import wallyPhoto from '../assets/photos/steampunk-wally.jpeg';
 import MenuContext from './MenuContext';
 import Modal from './Modal';
+import WelcomeModal from './WelcomeModal';
 import FirestoreFactory from '../Firestore';
 
 function Canvas() {
@@ -13,9 +14,14 @@ function Canvas() {
         y: 0,
     });
     const [modal, setModal] = useState(false);
+    const [welcomeModal, setWelcomeModal] = useState(true);
 
     const toggleModal = () => {
         setModal(!modal);
+    };
+
+    const toggleWelcomeModal = () => {
+        setWelcomeModal(!welcomeModal);
     };
 
     if (modal) {
@@ -79,7 +85,9 @@ function Canvas() {
     // Execute the following on component load
     useEffect(() => {
         // display character bounding boxes
-        drawBoundingBoxes();
+        // drawBoundingBoxes();
+
+        // display "Find These Characters" modal
 
         // Listen for right clicks and toggle `clicked` state
         const handleClick = () => setClicked(false);
@@ -109,6 +117,7 @@ function Canvas() {
                 <img src={wallyPhoto} alt="" />
                 {clicked && <MenuContext points={points} validateCharAtLoc={validateCharAtLoc} />}
             </div>
+            {welcomeModal && <WelcomeModal toggleWelcomeModal={toggleWelcomeModal} />}
             {modal && (
                 <Modal toggleModal={toggleModal} charName={activeCharacter} isFound={foundStatus} />
             )}
