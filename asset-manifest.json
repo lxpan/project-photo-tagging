@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/photo-tagging-app/static/css/main.e1be6821.css",
+    "main.js": "/photo-tagging-app/static/js/main.0be7514f.js",
+    "static/media/steampunk-wally.jpeg": "/photo-tagging-app/static/media/steampunk-wally.9a55bf038236e9b283da.jpeg",
+    "static/media/Timepiece.ttf": "/photo-tagging-app/static/media/Timepiece.359557ef5c3d199e3946.ttf",
+    "index.html": "/photo-tagging-app/index.html",
+    "main.e1be6821.css.map": "/photo-tagging-app/static/css/main.e1be6821.css.map",
+    "main.0be7514f.js.map": "/photo-tagging-app/static/js/main.0be7514f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e1be6821.css",
+    "static/js/main.0be7514f.js"
+  ]
+}
