@@ -73,6 +73,10 @@ Imagine if a rectangle was drawn on a balloon and then that balloon was inflated
 
 Ultimately, the decision was made to go with a fixed background image size for the sake of simplicity and to ensure that collision calculations could be made without the need for additional conversion calculations.
 
+## Future considerations
+
+Given more time, there are opportunities to add additional backgrounds with additional characters or objects to be found. These could be offered to the user from a home page featuring a "background select" feature.
+
 # How to install & run the project
 
 -   The project is best accessed using the github.io link: [lxpan.github.io/project-photo-tagging/](lxpan.github.io/project-photo-tagging/).
