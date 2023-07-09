@@ -79,7 +79,7 @@ Given more time, there are opportunities to add additional backgrounds with addi
 
 # How to install & run the project
 
--   The project is best accessed using the github.io link: [lxpan.github.io/project-photo-tagging/](lxpan.github.io/project-photo-tagging/).
+-   The project is best accessed using the github.io link: [lxpan.github.io/project-photo-tagging/](https://lxpan.github.io/project-photo-tagging/).
 
 # Attribution
 
